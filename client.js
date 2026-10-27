@@ -474,7 +474,7 @@ window.__ModuleLoader__.load({
           {
             type: 'button',
             className: 'dsh-shot-action dsh-shot-primary',
-            title: '复制并完成 (Enter)',
+            title: '复制并保存，完成 (Enter)',
             disabled: snapshot.busy,
             onClick: () => void finish('copy'),
           },
@@ -743,7 +743,7 @@ window.__ModuleLoader__.load({
             style: hasSelection ? { top: 16, bottom: 'auto' } : undefined,
           },
           hasSelection
-            ? '拖动画图 · Enter 复制并完成 · Esc 取消'
+            ? '拖动画图 · Enter 复制并保存 · Esc 取消'
             : '按住鼠标拖动选择截图区域 · Enter 复制整屏 · Esc 取消',
         ),
         h(
@@ -841,10 +841,18 @@ window.__ModuleLoader__.load({
         const blob = await composeBlob();
         if (action === 'save') {
           const result = await saveBlob(blob);
-          toast(`已保存到 ${result.path}`, 2400);
+          toast(`已保存到 ${result.path}`, 3200);
         } else {
+          let savedPath = null;
+          try {
+            const result = await saveBlob(blob);
+            savedPath = result?.path ?? null;
+          } catch {
+            /* 保存失败时至少保证剪贴板可用 */
+          }
           await copyBlob(blob);
-          toast('已复制到剪贴板，按 Ctrl+V 粘贴到输入框', 1800);
+          if (savedPath) toast(`已复制到剪贴板，并保存到 ${savedPath}`, 3600);
+          else toast('已复制到剪贴板，按 Ctrl+V 粘贴到输入框', 1800);
         }
       } catch (error) {
         setState({ busy: false, phase: 'error', error: error instanceof Error ? error.message : String(error) });
