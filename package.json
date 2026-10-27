@@ -1,0 +1,55 @@
+{
+  "name": "dsh-wechat-screenshot",
+  "version": "1.0.0",
+  "description": "微信风格 Windows 截图插件：隐藏窗口截图、直接截图、框选标注、复制与保存。WeChat-style screenshot plugin for DeepSeek Harness on Windows.",
+  "type": "module",
+  "license": "MIT",
+  "author": "tiamxiao",
+  "homepage": "https://github.com/tiamxiao/dsh-screenshot#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiamxiao/dsh-screenshot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tiamxiao/dsh-screenshot/issues"
+  },
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "screenshot",
+    "windows",
+    "wechat",
+    "annotation"
+  ],
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "capture-screen.ps1",
+    "copy-image.ps1",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "docs/*.png",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "meta": {
+    "title": "Screenshot",
+    "description": "WeChat-style screenshots: hide the window for a clean capture, or capture the screen directly, then crop and annotate."
+  },
+  "menu": {
+    "title": "Screenshot",
+    "hidden": "Capture with window hidden",
+    "direct": "Capture directly"
+  }
+}
